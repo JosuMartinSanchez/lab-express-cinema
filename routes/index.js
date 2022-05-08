@@ -45,4 +45,20 @@ router.get("/movies/:idmovies", async (req,res,next)=>{
 
 })
 
+router.get("/search", async (req,res)=>{
+  const {search} = req.query
+  try{
+    console.log(search);
+    let newObject = MoviesModel.find(search).select('title')
+
+    res.render('search.hbs',{
+      movieSearch: newObject
+    })
+
+
+  }catch(err){
+    console.log(err);
+  }
+})
+
 module.exports = router;
